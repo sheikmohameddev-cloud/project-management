@@ -2,9 +2,23 @@ from rest_framework import generics, status, viewsets, permissions, decorators, 
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.tokens import RefreshToken
+# pyrefly: ignore [missing-import]
 from django.contrib.auth import get_user_model
+# pyrefly: ignore [missing-import]
 from django.db.models import Count, Q
+# pyrefly: ignore [missing-import]
 from django.utils import timezone
+# pyrefly: ignore [missing-import]
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+# pyrefly: ignore [missing-import]
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+# pyrefly: ignore [missing-import]
+from dj_rest_auth.registration.views import SocialLoginView
+
+class GoogleLoginView(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = "https://saas-frontend-gs2l.onrender.com"
+    client_class = OAuth2Client
 
 from api.v1.serializers import (
     UserSerializer, RegisterSerializer, ProjectSerializer, TaskSerializer,
