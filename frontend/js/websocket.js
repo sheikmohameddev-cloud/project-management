@@ -21,8 +21,17 @@ const WS = {
         }
 
         const token = localStorage.getItem("access");
-        const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const url = `${protocol}//${location.host}${path}?token=${token}`;
+        let wsHost = location.host;
+        let protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+        
+        const apiBase = window.API?.API_BASE;
+        if (apiBase && apiBase.startsWith('http')) {
+            const apiURL = new URL(apiBase);
+            wsHost = apiURL.host;
+            protocol = apiURL.protocol === 'https:' ? 'wss:' : 'ws:';
+        }
+        
+        const url = `${protocol}//${wsHost}${path}?token=${token}`;
         
         const socket = new WebSocket(url);
         this.sockets.set(path, socket);
