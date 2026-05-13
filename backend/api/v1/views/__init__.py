@@ -141,7 +141,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         if u.role == "admin":
             return qs.all().distinct()
         elif u.role == "developer":
-            return qs.filter(assignees=u).distinct()
+            return qs.filter(Q(assignees=u) | Q(reporter=u)).distinct()
         return qs.filter(Q(project__owner=u) | Q(project__members__user=u)).distinct()
 
     def perform_create(self, serializer):
