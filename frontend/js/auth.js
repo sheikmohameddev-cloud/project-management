@@ -11,6 +11,22 @@ async function register(payload) {
   await API.api("/auth/register/", { method: "POST", body: payload });
   await login(payload.email, payload.password);
 }
+async function handleGoogleLogin(response) {
+    try {
+        const data = await API.api("/auth/google/login/", {
+            method: "POST",
+            body: { access_token: response.credential }
+        });
+        API.setTokens(
+            data.access || data.access_token, 
+            data.refresh || data.refresh_token
+        );
+        U.toast("Welcome to Synapse!", "success");
+        setTimeout(() => location.href = "/pages/dashboard.html", 1000);
+    } catch (err) {
+        U.toast("Google sign-in failed", "error");
+    }
+}
 
 async function logout() {
   try { await API.api("/auth/logout/", { method: "POST", body: { refresh: API.getRefresh() } }); } catch {}
