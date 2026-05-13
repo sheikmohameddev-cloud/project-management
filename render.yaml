@@ -21,7 +21,7 @@ services:
         value: "0"
       - key: ALLOWED_HOSTS
         value: "*"
-    startCommand: "gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
+    dockerCommand: "gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
 
   - type: worker
     name: saas-celery
@@ -43,19 +43,18 @@ services:
         fromService:
           type: web
           name: saas-backend
-          property: envVar
           envVarKey: SECRET_KEY
-    startCommand: "celery -A core worker -l info"
+    dockerCommand: "celery -A core worker -l info"
 
   - type: redis
     name: saas-redis
     region: frankfurt
     plan: free
+    ipAllowList: []
 
   - type: web
     name: saas-frontend
     env: static
-    region: frankfurt
     buildCommand: ""  # No build command needed for vanilla HTML/JS
     staticPublishPath: ./frontend
     routes:
