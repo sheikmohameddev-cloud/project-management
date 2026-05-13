@@ -1,5 +1,5 @@
 // Centralized API client
-const API_BASE = window.API_BASE || "/api/v1";
+const API_BASE = window.API_BASE || "https://saas-backend-4shz.onrender.com/api/v1";
 
 function getAccess() { return localStorage.getItem("access"); }
 function getRefresh() { return localStorage.getItem("refresh"); }
