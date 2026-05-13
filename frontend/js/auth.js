@@ -1,7 +1,9 @@
 // Auth helpers + page wiring
 async function login(email, password) {
   const data = await API.api("/auth/login/", { method: "POST", body: { email, password } });
-  API.setTokens(data.access, data.refresh);
+  const a = data.access || data.access_token;
+  const r = data.refresh || data.refresh_token;
+  API.setTokens(a, r);
   location.href = "/pages/dashboard.html";
 }
 
