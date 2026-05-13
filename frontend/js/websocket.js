@@ -78,7 +78,7 @@ const WS = {
     },
 
     connectProject(projectId, handlers) {
-        return this.connect(`/ws/project/${projectId}/`, handlers);
+        return this.connect(`/ws/projects/${projectId}/`, handlers);
     }
 };
 
