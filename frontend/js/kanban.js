@@ -153,6 +153,25 @@ async function openTaskModal(taskId) {
 
         <div class="mt-8 pt-6" style="border-top: 1px solid var(--border);">
             <div class="flex items-center justify-between mb-4">
+                <h3 style="font-size: 14px;">Attachments</h3>
+                <label class="btn btn-ghost" style="padding: 4px 8px; cursor: pointer; font-size: 12px; border: 1px solid var(--border);">
+                    <input type="file" id="fileUpload" style="display:none;" />
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                    Upload File
+                </label>
+            </div>
+            <div id="attachmentsList" style="display: grid; gap: 8px;">
+                ${t.attachments && t.attachments.length ? t.attachments.map(a => `
+                    <div class="flex items-center justify-between p-2 rounded" style="background: var(--bg-surface-hover);">
+                        <a href="${a.file}" target="_blank" class="text-sm hover:underline truncate" style="color: var(--accent); max-width: 80%;">${U.escapeHtml(a.filename)}</a>
+                        <span class="text-xs text-dim">${(a.size/1024).toFixed(1)} KB</span>
+                    </div>
+                `).join("") : '<div class="text-xs text-dim italic">No attachments yet.</div>'}
+            </div>
+        </div>
+
+        <div class="mt-8 pt-6" style="border-top: 1px solid var(--border);">
+            <div class="flex items-center justify-between mb-4">
                 <h3 style="font-size: 14px;">AI Tools</h3>
             </div>
             <button class="btn" id="aiSubtasksBtn" style="width: 100%; justify-content: flex-start; color: var(--accent); border-color: var(--accent);">
@@ -162,6 +181,38 @@ async function openTaskModal(taskId) {
         </div>
     </div>
   `);
+
+  const fileInput = back.querySelector("#fileUpload");
+  if (fileInput) {
+      fileInput.addEventListener("change", async (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("task", taskId);
+          
+          const label = e.target.closest('label');
+          const originalHtml = label.innerHTML;
+          label.innerHTML = "Uploading...";
+          try {
+              const res = await fetch(window.API.API_BASE + "/attachments/", {
+                  method: "POST",
+                  headers: { "Authorization": "Bearer " + window.API.getAccess() },
+                  body: formData
+              });
+              if (!res.ok) {
+                  const errorData = await res.json().catch(()=>({}));
+                  throw new Error(errorData.detail || "Upload failed");
+              }
+              U.toast("File uploaded successfully", "success");
+              back.remove();
+              location.reload();
+          } catch (err) {
+              U.toast(err.message, "error");
+              label.innerHTML = originalHtml;
+          }
+      });
+  }
 
   back.querySelector("#etf").addEventListener("submit", async (e) => {
     e.preventDefault(); 
