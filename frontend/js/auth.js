@@ -15,7 +15,7 @@ async function handleGoogleLogin(response) {
     try {
         const data = await API.api("/auth/google/login/", {
             method: "POST",
-            body: { access_token: "", id_token: response.credential }
+            body: { access_token: response.credential, id_token: response.credential }
         });
         API.setTokens(
             data.access || data.access_token, 
