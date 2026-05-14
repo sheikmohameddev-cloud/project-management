@@ -56,29 +56,31 @@
     </style>
 </head>
 <body>
-<header style="height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid var(--border); background: rgba(9,9,11,0.8); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 100;">
-    <div class="flex items-center gap-2">
+<header style="height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid var(--border); background: rgba(9,9,11,0.8); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;">
+    <div class="flex items-center gap-2" style="width: 200px;">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
         <span class="font-medium" style="font-size: 18px; letter-spacing: -0.02em;">Synapse</span>
     </div>
-    <nav class="flex gap-8 text-sm font-medium" style="color: var(--text-dim);">
+    <nav class="flex gap-10 text-sm font-medium" style="color: var(--text-dim);">
         <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
-        <a href="/pages/login.html" style="color: var(--text);">Sign in</a>
+        <a href="/pages/login.html">Sign in</a>
     </nav>
-    <a href="/pages/register.html" class="btn btn-primary">Get Started</a>
+    <div class="flex justify-end" style="width: 200px;">
+        <a href="/pages/register.html" class="btn btn-primary">Get Started</a>
+    </div>
 </header>
 
 <section class="hero slide-up">
-    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 24px;">
-        <span style="display: block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%;"></span>
+    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 32px;">
+        <span style="display: block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent);"></span>
         Now in public beta
     </div>
     <h1>Real-time tasks<br/><span class="gradient-text">built for speed.</span></h1>
     <p>Synapse combines the power of AI planning with a lightning-fast interface to help modern teams ship software without the overhead.</p>
     <div class="flex justify-center gap-4">
-        <a href="/pages/register.html" class="btn btn-primary" style="padding: 12px 32px; font-size: 14px;">Get started for free</a>
-        <a href="#features" class="btn" style="padding: 12px 32px; font-size: 14px;">View features</a>
+        <a href="/pages/register.html" class="btn btn-primary" style="height: 48px; padding: 0 32px; font-size: 15px;">Get started for free</a>
+        <a href="#features" class="btn" style="height: 48px; padding: 0 32px; font-size: 15px; color: var(--text);">View features</a>
     </div>
 </section>
 

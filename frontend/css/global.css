@@ -61,6 +61,17 @@ body {
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
   font-size: var(--font-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+a:hover {
+  color: var(--text);
 }
 
 button, input, select, textarea {
@@ -307,9 +318,16 @@ h3 { font-size: var(--font-lg); font-weight: 600; letter-spacing: -0.01em; }
 
 /* Utils */
 .flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
 .items-center { align-items: center; }
+.justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--space-1); }
 .gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
 .mt-4 { margin-top: var(--space-4); }
 
 .gradient-text {
