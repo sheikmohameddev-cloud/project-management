@@ -178,14 +178,17 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
-        "APP": {
+        "APPS": [{
             "client_id": config("GOOGLE_OAUTH_CLIENT_ID", default=""),
             "secret": config("GOOGLE_OAUTH_CLIENT_SECRET", default=""),
             "key": "",
-        },
+        }],
         "SCOPE": ["profile", "email"],
         "AUTH_PARAMS": {"access_type": "online"},
     }
