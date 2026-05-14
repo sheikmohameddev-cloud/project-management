@@ -17,8 +17,6 @@ from dj_rest_auth.registration.views import SocialLoginView
 
 class GoogleLoginView(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
-    callback_url = "https://saas-frontend-gs2l.onrender.com"
-    client_class = OAuth2Client
 
 from api.v1.serializers import (
     UserSerializer, RegisterSerializer, ProjectSerializer, TaskSerializer,
